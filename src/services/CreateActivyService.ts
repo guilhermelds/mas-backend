@@ -12,9 +12,9 @@ class CreateActivyService {
 
     public async execute({name,activy_date,courseUnitId,grade}:IActivyData) {
         const activysRepository = getRepository(Activy)
-        const checkCtivyExists = await activysRepository.findOne({name})
+        const checkCtivyExists = await activysRepository.findOne({name,courseUnitId})
         if (checkCtivyExists) {
-            throw new Error("Nome já existe") 
+            throw new Error("Atividade já existe") 
         } 
         const activy = activysRepository.create({
             name,
