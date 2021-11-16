@@ -11,7 +11,7 @@ interface AuthData {
 
 class AuthenticateUserService{
 
-    public async execute({email,password}: AuthData): Promise<String | {}> {
+    public async execute({email,password}: AuthData): Promise<string | {}> {
 
         const usersRepository = getRepository(User);
 
@@ -31,10 +31,10 @@ class AuthenticateUserService{
             }
         }
 
-        const {secret, expiresIn } = authConfig.jwt;
+        const { secret, expiresIn } = authConfig.jwt;
 
         const token = sign({"role":"user"}, secret, {
-            //algorithm: 'ES256',
+            //algorithm: 'RS256',
             subject: user.id,
             expiresIn
         })
