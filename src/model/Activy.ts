@@ -1,39 +1,38 @@
-import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn} from 'typeorm'
+import {Column, CreateDateColumn, Entity, JoinTable, ManyToOne, PrimaryColumn} from "typeorm";
 import {v4 as uuid} from 'uuid';
 
-import { CourseUnit } from './CourseUnit';
+import {CourseUnit} from './CourseUnit';
 
 @Entity("activies")
-class Activy{
+class Activy {
 
     constructor(){
         if(!this.id){
-            this.id = uuid()
+            this.id = uuid();
         }
     }
 
     @PrimaryColumn()
-    readonly id: string
+    readonly id: string;
 
     @Column()
     name: string;
 
     @Column()
-    activy_date: string
+    activy_date: Date;
 
     @Column()
-    courseUnitId: string
+    courseUnitId: string;
 
     @Column()
-    grade: number
+    grade: number;
 
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(()=> CourseUnit, course_unit => course_unit.activies)
-    @JoinColumn()
+    @ManyToOne(() => CourseUnit, course_unit => course_unit.activies)
+    @JoinTable()
     course_unit: CourseUnit
-
 }
 
-export {Activy}
+export {Activy};
