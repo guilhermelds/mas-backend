@@ -6,6 +6,9 @@
   "repository": "https://github.com/guilhermelds/mas-backend.git",
   "author": "Guilherme lenon da silva",
   "license": "MIT",
+  "engines": {
+    "node": "12"
+  },
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "postinstall": "tsc",
