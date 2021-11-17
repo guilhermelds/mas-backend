@@ -46,29 +46,35 @@ var CreateUserService = /** @class */ (function () {
     CreateUserService.prototype.execute = function (_a) {
         var name = _a.name, email = _a.email, password = _a.password;
         return __awaiter(this, void 0, void 0, function () {
-            var usersRepository, checkUserExists, hashedPassword, user;
+            var userRepository, checkUserExists, hashedPassword, user, error_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        usersRepository = (0, typeorm_1.getRepository)(User_1.User);
-                        return [4 /*yield*/, usersRepository.findOne({ email: email })];
+                        _b.trys.push([0, 4, , 5]);
+                        userRepository = (0, typeorm_1.getRepository)(User_1.User);
+                        return [4 /*yield*/, userRepository.findOne({ email: email })];
                     case 1:
                         checkUserExists = _b.sent();
                         if (checkUserExists) {
-                            throw new Error("Email já existe");
+                            return [2 /*return*/, { error: "Email já existe" }];
                         }
                         return [4 /*yield*/, (0, bcryptjs_1.hash)(password, 8)];
                     case 2:
                         hashedPassword = _b.sent();
-                        user = usersRepository.create({
+                        user = userRepository.create({
                             name: name,
                             email: email,
                             password: hashedPassword
                         });
-                        return [4 /*yield*/, usersRepository.save(user)];
+                        return [4 /*yield*/, userRepository.save(user)];
                     case 3:
                         _b.sent();
                         return [2 /*return*/, user];
+                    case 4:
+                        error_1 = _b.sent();
+                        console.log(error_1);
+                        return [2 /*return*/, null];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
