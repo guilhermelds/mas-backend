@@ -69,6 +69,7 @@ var CourseUnitController = /** @class */ (function () {
                         return [4 /*yield*/, getCoursesUnits.execute(userId)];
                     case 1:
                         coursesUnits = _a.sent();
+                        //console.log(coursesUnits);
                         return [2 /*return*/, response.json(coursesUnits)];
                 }
             });
