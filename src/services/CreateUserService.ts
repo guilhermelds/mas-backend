@@ -11,22 +11,29 @@ interface IUserData {
 
 class CreateUserService {
 
-    public async execute({name,email,password}:IUserData) {
-        const usersRepository = getRepository(User)
-        const checkUserExists = await usersRepository.findOne({email})
-        if (checkUserExists) {
-            throw new Error("Email já existe") 
-        }
-        const hashedPassword = await hash(password,8)
-        const user = usersRepository.create({
-            name,
-            email,
-            password:hashedPassword
-        })
-        await usersRepository.save(user)
+    public async execute({ name, email, password }: IUserData) {
+        try {
+            const userRepository = getRepository(User)
+            const checkUserExists = await userRepository.findOne({ email });
+            if (checkUserExists) {
+                return { error: "Email já existe" }
+            }
+            const hashedPassword = await hash(password, 8);
 
-        return user;
+            const user = userRepository.create({
+                name,
+                email,
+                password: hashedPassword
+            })
+            await userRepository.save(user);
+
+            return user;
+        } catch (error) {
+            console.log(error)
+            return null;
+        }
+
     }
 }
 
-export {CreateUserService}
+export { CreateUserService }
