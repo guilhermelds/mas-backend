@@ -4,8 +4,8 @@ module.exports =
     "url": process.env.DATABASE_URL,
     
     "entities": process.env.NODE_ENV == "production" 
-        ? ["dist/models/*.js"] 
-        : ["src/models/*.ts"],
+        ? ["dist/model/*.js"] 
+        : ["src/model/*.ts"],
 
     "migrations": process.env.NODE_ENV == "production"
         ? ["dist/database/migrations/*.js" ]
@@ -15,7 +15,7 @@ module.exports =
         "migrationsDir": [
             "src/database/migrations"
         ],
-        "entitiesDir": "src/models"
+        "entitiesDir": "src/model"
     }
 }
 

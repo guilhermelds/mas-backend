@@ -22,7 +22,7 @@ class ActivyController {
         const getActivies = new GetActivyService();
 
         const activies = await getActivies.execute(userId);
-
+        
         return response.json(activies);
 
     }
